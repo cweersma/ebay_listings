@@ -5,7 +5,7 @@ require_once 'vendor/autoload.php';
 require_once 'inc/config.php';
 $env = $_SESSION['env'];
 $credentials = $apiauth[$env];
-$clientId = $credentials['client_id'];
+$clientId = $credentials['clientId'];
 $redirectUri = $credentials['ruName'];
 
 $baseUrl = "https://auth.".($env == "sandbox" ? "sandbox.": "")."/oauth2/authorize";
