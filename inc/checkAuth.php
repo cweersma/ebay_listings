@@ -13,7 +13,7 @@ if (!$_SESSION['env']){
 if (!isset($_SESSION['ebay_access_token_'.$_SESSION['env']]) || $_SESSION['ebay_access_token_expires_'.$_SESSION['env']] >= time()){
     //If the refresh token exists, retrieve it; else send the user to authorize.php
     if (!file_exists("/tmp/ebay_refresh_token_".$_SESSION['env'])){
-        header('Location: '.$baseURL);
+        header('Location: '.$baseURL.'/authorize.php');
         die();
     }
     $refresh_token = file_get_contents("/tmp/ebay_refresh_token_".$_SESSION['env']);
