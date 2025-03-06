@@ -1,4 +1,5 @@
 <?php
+session_start();
 global $apiauth;
 require_once 'vendor/autoload.php';
 require_once 'inc/config.php';
