@@ -1,7 +1,8 @@
 <?php
 //Set the session variable and use inc/checkAuth.php to validate
 try {
-    session_start(["env" => $_GET["env"]]);
+    session_start();
+    $_SESSION['env'] = $_GET['env'];
 }
 catch (Exception $e) {
     die("Improper query string");
