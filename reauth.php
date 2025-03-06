@@ -1,6 +1,7 @@
 <?php
-global $apiauth;
 require_once 'inc/config.php';
+global $apiauth;
+global $baseURL;
 $code = $_GET['code'];
 $env = $_GET['state'];
 $grantUrl = "https://api.".($env == "sandbox" ? "sandbox." : "")."ebay.com/identity/v1/oauth2/token";
@@ -27,3 +28,7 @@ fclose($fp);
 //Use access token as session variable
 $_SESSION['ebay_access_token_'.$env] = $responseJson['access_token'];
 $_SESSION['ebay_access_token_expires_'.$env] = time() + $responseJson['expires_in'];
+
+//Redirect to main.php
+header('Location: '.$baseURL.'/main.php');
+die();
