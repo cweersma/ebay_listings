@@ -14,8 +14,8 @@ git clone https://github.com/cweersma/ebay_listings.git .
 # Install dependencies
 composer install
 
-# Exclude the configuration file from git update
-git update-index --skip-worktree inc/config.php
+# Make a copy of the empty configuration file
+cp inc/config.template.php inc/config.php
 ```
 
 * Edit inc/config.php and provide the necessary information as specified in the comments in this file.
