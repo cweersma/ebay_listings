@@ -1,5 +1,6 @@
 <?php
 //Include this with every page
+session_start();
 require_once("inc/checkAuth.php");
 ?>
 <html>
