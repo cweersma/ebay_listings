@@ -1,7 +1,7 @@
 <?php
 global $apiauth;
 require_once 'vendor/autoload.php';
-require_once 'inc/apiauth.php';
+require_once 'inc/config.php';
 $env = $_SESSION['env'];
 $credentials = $apiauth[$env];
 $clientId = $credentials['client_id'];

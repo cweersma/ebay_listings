@@ -1,7 +1,6 @@
 <?php
 require_once 'vendor/autoload.php';
-require_once 'inc/connection.php';
-require_once 'inc/apiauth.php';
+require_once 'inc/config.php';
 
 use EbayOauthToken\EbayOauthToken;
 
@@ -9,6 +8,7 @@ use EbayOauthToken\EbayOauthToken;
  * @param string $content A JSON string to be sent as the request body
  * @param bool $sandbox Whether this is a sandbox call
  * @return void
+ * @throws Exception
  */
 function ebayRequest(string $content, bool $sandbox = false) {
     global $apiauth;
