@@ -1,5 +1,7 @@
 {
   "require": {
-    "kitsunetech/velox-server": ">=1.0.0"
+    "dvicklund/ebay-oauth-php-client": "@stable",
+    "kitsunetech/velox-server": ">=1.0.0",
+    "ext-curl": "*"
   }
 }
