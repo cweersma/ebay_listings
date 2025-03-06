@@ -6,12 +6,12 @@ session_start();
     <head>
         <title>NPC eBay Listing Automation</title>
         <script>
-            document.onload = function(){
+            window.onload = function(){
                 document.getElementById("sandbox").addEventListener("click",function(){
-                    window.location = "setSession.php?env=sandbox";
+                    window.location = "/inc/setSession.php?env=sandbox";
                 });
                 document.getElementById("production").addEventListener("click",function(){
-                    window.location = "setSession.php?env=production";
+                    window.location = "/inc/setSession.php?env=production";
                 });
             }
         </script>
