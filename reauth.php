@@ -1,6 +1,6 @@
 <?php
 global $apiauth;
-require_once 'inc/apiauth.php';
+require_once 'inc/config.php';
 $code = $_GET['code'];
 $env = $_GET['state'];
 $grantUrl = "https://api.".($env == "sandbox" ? "sandbox." : "")."ebay.com/identity/v1/oauth2/token";
