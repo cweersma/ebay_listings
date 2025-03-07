@@ -10,7 +10,7 @@ require_once("inc/checkAuth.php");
         <link rel="stylesheet" href="style/<?php echo $_SESSION['env']; ?>.css" type="text/css" />
         <script>
             window.onload = function(){
-                document.getElementById("submit").addEventListener("click", function(){
+                document.getElementById("submitRequest").addEventListener("click", function(){
                     let url = document.getElementById("path").value;
                     if (!url){
                         alert("URL path required");
@@ -30,6 +30,11 @@ require_once("inc/checkAuth.php");
                 });
             }
         </script>
+        <style>
+            #path, #headers { width: 50ch; }
+            #headers { height: 5em; }
+            #payload { width: 50vw; height: 30vh; }
+        </style>
     </head>
     <body>
         <h1>eBay API test (<?php echo $_SESSION['env']; ?>)</h1>
@@ -45,7 +50,7 @@ require_once("inc/checkAuth.php");
             <br/>
             <label for="headers">Headers (Authorization included by default):</label><textarea id="headers" title="Each header should go on its own line."></textarea><br/>
             <label for="payload">Payload:</label><textarea id="payload"></textarea><br/>
-            <button id="submit">Submit</button>
+            <button id="submitRequest">Submit</button>
         </div>
         <div id="output">
             <h2>Output</h2>
