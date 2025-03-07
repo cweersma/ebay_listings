@@ -24,9 +24,7 @@ require_once("inc/checkAuth.php");
                             'payload': document.getElementById("payload").value,
                             'method': document.getElementById("method").value
                         })
-                    }).then(response => response.text)
-                        .then(resultText => { document.getElementById("response").innerHTML = resultText; });
-                    );
+                    }).then(response => response.text).then(resultText => { document.getElementById("response").innerHTML = resultText; });
                 });
             }
         </script>
