@@ -16,7 +16,7 @@ require_once("inc/checkAuth.php");
                         alert("URL path required");
                         return;
                     }
-                    fetch("inc/makeRequest.php",{
+                    fetch("inc/makeRequest.php", {
                         method: "POST",
                         body: new URLSearchParams({
                             'url': document.getElementById("path").value,
@@ -24,9 +24,9 @@ require_once("inc/checkAuth.php");
                             'payload': document.getElementById("payload").value,
                             'method': document.getElementById("method").value
                         })
-                    ).then(response => response.text)
+                    }).then(response => response.text)
                         .then(resultText => { document.getElementById("response").innerHTML = resultText; });
-                    })
+                    );
                 });
             }
         </script>
