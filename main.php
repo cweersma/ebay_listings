@@ -3,7 +3,8 @@
 session_start();
 require_once("inc/checkAuth.php");
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <title>NPC eBay Listing Automation (<?php echo $_SESSION['env']; ?>)</title>
         <link rel="stylesheet" href="style/main.css" type="text/css" />
