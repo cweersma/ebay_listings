@@ -12,7 +12,7 @@ require_once("inc/checkAuth.php");
             function $(id){
                 return document.getElementById(id);
             }
-            window.onload = function(){
+            document.onload = function(){
                 $("submitRequest").addEventListener("onclick", function(){
                     let url = $("path").value;
                     if (!url){
