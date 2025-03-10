@@ -1,7 +1,7 @@
 <?php
 //Include this with every page
 session_start();
-require_once("inc/checkAuth.php");
+require_once("checkAuth.php");
 
 $requestDetails = $_POST;
 $url = "https://api.".($_SESSION['env'] == "sandbox" ? "sandbox." : "")."ebay.com/".$requestDetails['url'];
