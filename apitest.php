@@ -13,8 +13,8 @@ require_once("inc/checkAuth.php");
             function $(id){
                 return document.getElementById(id);
             }
-            document.onload = function(){
-                $("submitRequest").addEventListener("onclick", function(){
+            window.onload = function(){
+                $("submitRequest").addEventListener("click", function(e){
                     let url = $("path").value;
                     if (!url){
                         alert("URL path required");
@@ -30,7 +30,7 @@ require_once("inc/checkAuth.php");
                         })
                     }).then(response => { return response.text(); }).then(resultText => { $("response").innerHTML = resultText; });
                 });
-                $("clearBtn").addEventListener("onclick",function(){
+                $("clearBtn").addEventListener("click",function(e){
                     $("path").text = "";
                     $("headers").text = "";
                     $("payload").text = "";
