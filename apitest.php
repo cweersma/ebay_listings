@@ -31,9 +31,9 @@ require_once("inc/checkAuth.php");
                     }).then(response => { return response.text(); }).then(resultText => { $("response").innerHTML = resultText; });
                 });
                 $("clearBtn").addEventListener("click",() => {
-                    $("path").text = "";
-                    $("headers").text = "";
-                    $("payload").text = "";
+                    $("path").value = "";
+                    $("headers").value = "";
+                    $("payload").value = "";
                 });
             }
         </script>
