@@ -33,7 +33,7 @@ if (!isset($_SESSION['ebay_access_token_'.$_SESSION['env']]) || $_SESSION['ebay_
     curl_close($ch);
     $responseJson = json_decode($response, true);
     if (isset($responseJson['error'])){
-        throw new Exception($responseJson['error']);
+        throw new Exception($responseJson['error'].": ".$responseJson['error_description']);
     }
     $_SESSION['ebay_access_token_'.$_SESSION['env']] = $responseJson['access_token'];
     $_SESSION['ebay_access_token_expires_'.$_SESSION['env']] = time() + $responseJson['expires_in'];
