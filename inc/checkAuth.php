@@ -17,6 +17,10 @@ if (!isset($_SESSION['ebay_access_token_'.$_SESSION['env']]) || $_SESSION['ebay_
         die();
     }
     $refresh_token = file_get_contents("/tmp/ebay_refresh_token_".$_SESSION['env']);
+    if ($refresh_token == ""){
+        header('Location: '.$baseURL.'/authorize.php');
+        die();
+    }
     $credentials = $apiauth[$_SESSION['env']];
     $url = "https://api.".($_SESSION['env'] == "sandbox" ? "sandbox." : "")."ebay.com/identity/v1/oauth2/token";
     $headers = [
