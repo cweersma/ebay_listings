@@ -2,7 +2,7 @@
 require_once 'inc/config.php';
 global $apiauth;
 global $baseURL;
-$code = $_GET['code'];
+$code = urldecode($_GET['code']);
 $env = $_GET['state'];
 $grantUrl = "https://api.".($env == "sandbox" ? "sandbox." : "")."ebay.com/identity/v1/oauth2/token";
 $credentials = $apiauth[$env];
@@ -10,7 +10,14 @@ $headers = [
     'Content-Type: application/x-www-form-urlencoded',
     'Authorization: Basic ' . base64_encode($credentials['clientId'] . ':' . $credentials['clientSecret'])
 ];
-$body = "grant_type=authorization_code&code=$code&redirect_uri=" . $credentials['redirect_uri'];
+$postData = [
+    "grant_type" => "authorization_code",
+    "code" => $code,
+    "redirect_uri" => $credentials['ruName']
+];
+$body = http_build_query($postData);
+
+//$body = "grant_type=authorization_code&code=".$code."&redirect_uri=" . $credentials['redirect_uri'];
 $ch = curl_init($grantUrl);
 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
