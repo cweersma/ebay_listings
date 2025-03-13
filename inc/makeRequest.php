@@ -8,6 +8,7 @@ $url = "https://api.".($_SESSION['env'] == "sandbox" ? "sandbox." : "")."ebay.co
 $headers = $requestDetails['headers'] ?? "";
 $body = $requestDetails['body'] ?? null;
 $method = $requestDetails['method'] ?? "GET";
+$tokenType = $requestDetails['tokenType'] ?? "user";
 
 //Parse any headers passed
 $headerArray = [];
@@ -19,7 +20,7 @@ $commonHeaders = [
     "Accept: application/json",
     "Accept-Charset: utf-8",
     "Accept-Language: en-US",
-    "Authorization: Bearer ".$_SESSION['ebay_access_token_'.$_SESSION['env']],
+    "Authorization: Bearer ".$_SESSION['ebay_'.$tokenType.'_access_token_'.$_SESSION['env']],
     "Content-Type: application/json",
     "Content-Language: en-US"
 ];
@@ -35,4 +36,3 @@ if ($body) curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
 $response = curl_exec($ch);
 
 echo $response;
-
