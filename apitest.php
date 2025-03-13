@@ -20,13 +20,21 @@ require_once("inc/checkAuth.php");
                         alert("URL path required");
                         return;
                     }
+                    let tokenType = null;
+                    if ($("tokenUser").checked){
+                        tokenType = "user";
+                    }
+                    else if($("tokenApp").checked){
+                        tokenType = "application";
+                    }
                     fetch("inc/makeRequest.php", {
                         method: "POST",
                         body: new URLSearchParams({
                             'url': url,
                             'headers': $("headers").value,
                             'payload': $("payload").value,
-                            'method': $("method").value
+                            'method': $("method").value,
+                            'tokenType': tokenType
                         })
                     }).then(response => { return response.text(); }).then(resultText => { $("response").innerHTML = resultText; });
                 });
@@ -55,6 +63,11 @@ require_once("inc/checkAuth.php");
                 <option value="DELETE">DELETE</option>
             </select>
             <br/>
+            <label for="token">Token type:</label>
+            <fieldset id="token">
+                <label for="tokenUser">User</label><input type="radio" id="tokenUser" name="token" value="user" checked />
+                <label for="tokenApp">Application</label><input type="radio" id="tokenApp" name="token" value="app" />
+            </fieldset>
             <label for="headers">Headers (Authorization included by default):</label><textarea id="headers" title="Each header should go on its own line."></textarea><br/>
             <label for="payload">Payload:</label><textarea id="payload"></textarea><br/>
             <button id="submitRequest">Submit</button><button id="clearBtn">Clear</button>
