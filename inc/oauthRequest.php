@@ -1,7 +1,8 @@
 <?php
 require_once('config.php');
 global $apiauth;
-function oauthRequest(array $postData, string $env) use ($apiauth) : array {
+function oauthRequest(array $postData, string $env) : array {
+    global $apiauth;
     $grantUrl = "https://api.".($env == "sandbox" ? "sandbox." : "")."ebay.com/identity/v1/oauth2/token";
     $credentials = $apiauth[$env];
     $headers = [
