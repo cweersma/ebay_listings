@@ -1,5 +1,7 @@
 <?php
 require_once 'config.php';
+require_once 'oauthRequest.php';
+
 global $apiauth;
 global $baseURL;
 
