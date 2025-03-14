@@ -35,10 +35,10 @@ async function apiRequest(endpoint, method = "GET", tokenType = "user", payload 
     if (!endpoint){
         return Promise.reject(new Error("Endpoint path required"));
     }
-    if (method.match(/^GET|POST|PUT|PATCH|DELETE/)) {
+    if (!/GET|POST|PUT|PATCH|DELETE/.test(method)) {
         return Promise.reject(new Error("Incorrect method specified"));
     }
-    if (tokenType.match(/^user|application/)) {
+    if (!/user|application/.test(tokenType)) {
         return Promise.reject(new Error("Incorrect token type specified"));
     }
     if (method === "GET" && payload != null){
