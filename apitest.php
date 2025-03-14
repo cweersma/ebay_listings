@@ -16,7 +16,7 @@ require_once("inc/checkAuth.php");
             }
             window.onload = () => {
                 $("submitRequest").addEventListener("click", () => {
-                    let tokenType = null;
+                    let tokenType = '';
                     if ($("tokenUser").checked){
                         tokenType = "user";
                     }
