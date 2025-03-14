@@ -3,6 +3,10 @@
 session_start();
 require_once("checkAuth.php");
 
+function assembleHeaders(string &$value, string $key){
+    $value = $key.": ".$value;
+}
+
 $requestDetails = $_POST;
 $url = "https://api.".($_SESSION['env'] == "sandbox" ? "sandbox." : "")."ebay.com/".$requestDetails['url'];
 $headers = $requestDetails['headers'] ?? "";
@@ -12,20 +16,21 @@ $tokenType = $requestDetails['tokenType'] ?? "user";
 
 //Parse any headers passed
 $headerArray = [];
-if ($headers){
-    $headerArray = explode("\n", $headers);
-}
 //Add common headers
 $commonHeaders = [
-    "Accept: application/json",
-    "Accept-Charset: utf-8",
-    "Accept-Language: en-US",
-    "Authorization: Bearer ".$_SESSION['ebay_'.$tokenType.'_access_token_'.$_SESSION['env']],
-    "Content-Type: application/json",
-    "Content-Language: en-US"
+    "Accept"            => "application/json",
+    "Accept-Charset"    => "utf-8",
+    "Accept-Language"   => "en-US",
+    "Authorization"     => "Bearer ".$_SESSION['ebay_'.$tokenType.'_access_token_'.$_SESSION['env']],
+    "Content-Type"      => "application/json",
+    "Content-Language"  => "en-US"
 ];
-$headerArray = array_merge($commonHeaders, $headerArray);
-
+if ($headers){
+    $headerArray = json_decode($headers, true);
+    $headerArray = array_merge($headerArray, $commonHeaders);
+    array_walk($headerArray, 'assembleHeaders');
+    $headerArray = array_values($headerArray);
+}
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_HTTPHEADER, $headerArray);
