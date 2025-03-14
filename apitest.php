@@ -23,14 +23,17 @@ require_once("inc/checkAuth.php");
                     else if($("tokenApp").checked){
                         tokenType = "application";
                     }
-                    let headersObj = {};
-                    let headersArray = $("headers").value.split("/\r?\n/");
-                    for (let i=0; i<headersArray.length; i++){
-                        let headerComponents = headersArray[i].split(": ");
-                        headersObj[headerComponents[0]] = headerComponents[1];
+                    let headersObj = null;
+                    if ($("headers").value) {
+                        headersObj = {};
+                        let headersArray = $("headers").value.split("/\r?\n/");
+                        for (let i = 0; i < headersArray.length; i++) {
+                            let headerComponents = headersArray[i].split(": ");
+                            headersObj[headerComponents[0]] = headerComponents[1];
+                        }
                     }
                     let payloadObj = $("payload").value ? JSON.parse($("payload").value) : null;
-                    headersObj = headersObj !== {} ? headersObj : null;
+
 
                     apiRequest($("path").value,$("method").value,tokenType,payloadObj,headersObj)
                         .then(resultObj => { return JSON.parse(resultObj)});
