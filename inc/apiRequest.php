@@ -12,7 +12,7 @@
  *
  * @return array The response from eBay, decoded into a nested associative array.
  */
-function apiRequest(string $endpoint, string $method = 'GET', string $tokenType = 'user', ?array $payload = null, array $headers = []) : array {
+function apiRequest(string $endpoint, string $method = 'GET', string $tokenType = 'user', ?array $payload = null, ?array $headers = null) : array {
     function assembleHeaders(string &$value, string $key) : void {
         $value = $key.": ".$value;
     }
@@ -42,7 +42,7 @@ function apiRequest(string $endpoint, string $method = 'GET', string $tokenType 
         "Content-Language"  => "en-US"
     ];
     //Combine passed headers with common headers
-    $headerArray = array_merge($headers, $commonHeaders);
+    $headerArray = array_merge($headers ?? [], $commonHeaders);
     array_walk($headerArray, 'assembleHeaders');
     $headerArray = array_values($headerArray);
 
