@@ -31,7 +31,7 @@
     Returns:
         a Promise that fulfills to an object representing the JSON response from the API.
  */
-async function apiRequest(endpoint, method = "GET", tokenType = "user", payload = null, headers = {}){
+async function apiRequest(endpoint, method = "GET", tokenType = "user", payload = null, headers = null){
     if (!endpoint){
         return Promise.reject(new Error("Endpoint path required"));
     }
@@ -49,15 +49,20 @@ async function apiRequest(endpoint, method = "GET", tokenType = "user", payload 
     }
     let headersString = JSON.stringify(headers);
     let payloadString = JSON.stringify(payload);
+    let requestObj = {
+        'url': endpoint,
+        'method': method,
+        'tokenType': tokenType
+    }
+    if (headersString){
+        requestObj.headers = headersString;
+    }
+    if (payloadString){
+        requestObj.payload = payloadString;
+    }
     return fetch("inc/makeRequest.php", {
         method: "POST",
-        body: new URLSearchParams({
-            'url': endpoint,
-            'headers': headersString,
-            'payload': payloadString,
-            'method': method,
-            'tokenType': tokenType
-        })
+        body: new URLSearchParams(requestObj)
     })
         .then(response => { return response.text(); })
         .then(text => { return JSON.parse(text); });
