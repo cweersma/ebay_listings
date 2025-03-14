@@ -32,7 +32,7 @@ require_once("inc/checkAuth.php");
                     let payload = $("payload").value ?? null;
                     let headers = headersObj !== {} ? headersObj : null;
 
-                    apiRequest($("path").value,$("method").value,tokenType,payload,headers))
+                    apiRequest($("path").value,$("method").value,tokenType,payload,headers)
                         .then(resultObj => { return JSON.parse(resultObj)});
                 });
                 $("clearBtn").addEventListener("click",() => {
