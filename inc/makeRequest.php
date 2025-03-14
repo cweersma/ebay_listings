@@ -5,7 +5,7 @@ require_once("checkAuth.php");
 require_once("apiRequest.php");
 $payload = null;
 $headers = null;
-if (isset($_POST['payload']){
+if (isset($_POST['payload'])){
     $payload = json_decode($_POST['payload'],true);
 }
 if (isset($_POST['headers'])){
