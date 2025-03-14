@@ -29,10 +29,10 @@ require_once("inc/checkAuth.php");
                         let headerComponents = headersArray[i].split(": ");
                         headersObj[headerComponents[0]] = headerComponents[1];
                     }
-                    let payload = $("payload").value ?? null;
-                    let headers = headersObj !== {} ? headersObj : null;
+                    let payloadObj = $("payload").value ? JSON.parse($("payload").value) : null;
+                    headersObj = headersObj !== {} ? headersObj : null;
 
-                    apiRequest($("path").value,$("method").value,tokenType,payload,headers)
+                    apiRequest($("path").value,$("method").value,tokenType,payloadObj,headersObj)
                         .then(resultObj => { return JSON.parse(resultObj)});
                 });
                 $("clearBtn").addEventListener("click",() => {
