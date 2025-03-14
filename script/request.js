@@ -2,13 +2,23 @@
     apiRequest() -- sends an API request to eBay by way of the makeRequest.php script
 
     Parameters:
-         endpoint: the URL of the API endpoint to be used, as specified in the API documentation (required)
-         method: the HTTP method to be used for this request, as specified in the API documentation
-            (GET, POST, PUT, DELETE, etc.) (default is "GET")
-         tokenType: the type of access token needed for this API call (either "user" or "application" -- default is "user")
-         payload: an object representation of the request body (if any) as specified in the API documentation;
-            this will be converted to a JSON string when the request is made (conditionally required based on method)
-         headers: an object containing name-value pairs of headers to be sent with the request (optional)
+         endpoint (required):               the path of the endpoint, including the query string if applicable, but
+                                            excluding the domain (which will be added by makeRequest.php depending on
+                                            the current environment)
+                                            E.g., if the documentation shows the endpoint URI as
+                                            https://api.sandbox.ebay.com/buy/browse/v1/item_summary/search?q=drone&limit=3,
+                                            this argument should be passed as "buy/browse/v1/item_summary/search?q=drone&limit=3"
+
+         method (optional):                 the HTTP method to be used for this request, as specified in the API documentation
+                                            (GET, POST, PUT, DELETE, etc.) (default is "GET")
+
+         tokenType (optional):              the type of access token needed for this API call
+                                            (either "user" or "application" -- default is "user")
+
+         payload (conditionally required):  an object representation of the request body (if any) as specified in the
+                                            API documentation; this will be converted to a JSON string when the request is made
+
+         headers: (optional):               an object containing name-value pairs of headers to be sent with the request
 
          * Note: makeRequest.php adds the following headers automatically; these do not need to be provided to apiRequest():
              Accept: application/json

@@ -9,17 +9,13 @@ require_once("inc/checkAuth.php");
         <title>eBay API test (<?php echo $_SESSION['env']; ?>)</title>
         <link rel="stylesheet" href="style/main.css" type="text/css" />
         <link rel="stylesheet" href="style/<?php echo $_SESSION['env']; ?>.css" type="text/css" />
+        <script type="text/javascript" src="script/request.js"></script>
         <script>
             function $(id){
                 return document.getElementById(id);
             }
             window.onload = () => {
                 $("submitRequest").addEventListener("click", () => {
-                    let url = $("path").value;
-                    if (!url){
-                        alert("URL path required");
-                        return;
-                    }
                     let tokenType = null;
                     if ($("tokenUser").checked){
                         tokenType = "user";
@@ -27,16 +23,14 @@ require_once("inc/checkAuth.php");
                     else if($("tokenApp").checked){
                         tokenType = "application";
                     }
-                    fetch("inc/makeRequest.php", {
-                        method: "POST",
-                        body: new URLSearchParams({
-                            'url': url,
-                            'headers': $("headers").value,
-                            'payload': $("payload").value,
-                            'method': $("method").value,
-                            'tokenType': tokenType
-                        })
-                    }).then(response => { return response.text(); }).then(resultText => { $("response").innerHTML = resultText; });
+                    let headersObj = {};
+                    let headersArray = $("headers").value.split("/\r?\n/");
+                    for (let i=0; i<headersArray.length; i++){
+                        let headerComponents = headersArray[i].split(": ");
+                        headersObj[headerComponents[0]] = headerComponents[1];
+                    }
+                    apiRequest($("path").value,$("method").value,tokenType,$("payload").value,JSON.stringify(headersObj))
+                        .then(resultObj => { return JSON.parse(resultObj)});
                 });
                 $("clearBtn").addEventListener("click",() => {
                     $("path").value = "";
