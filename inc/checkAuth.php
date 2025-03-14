@@ -35,7 +35,7 @@ if (!isset($_SESSION['ebay_user_access_token_'.$_SESSION['env']]) || $_SESSION['
 if (!isset($_SESSION['ebay_application_access_token_'.$_SESSION['env']]) || $_SESSION['ebay_application_access_token_expires_'.$_SESSION['env']] >= time()){
     $applicationAccess = oauthRequest([
         "grant_type" => "client_credentials",
-        "scope" => urlencode(implode(" ",$apiauth['app_scopes']))
+        "scope" => implode(" ",$apiauth['app_scopes'])
     ],$_SESSION['env']);
     $_SESSION['ebay_application_access_token_'.$_SESSION['env']] = $applicationAccess['access_token'];
     $_SESSION['ebay_application_access_token_expires_'.$_SESSION['env']] = time() + $applicationAccess['expires_in'];

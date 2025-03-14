@@ -17,7 +17,7 @@ $userAccess = oauthRequest([
 
 $applicationAccess = oauthRequest([
     "grant_type" => "client_credentials",
-    "scope" => rawurlencode(implode(" ",$apiauth['app_scopes']))
+    "scope" => implode(" ",$apiauth['app_scopes'])
 ],$env);
 
 //Write refresh token to temp file

@@ -9,7 +9,7 @@ function oauthRequest(array $postData, string $env) : array {
         'Content-Type: application/x-www-form-urlencoded',
         'Authorization: Basic ' . base64_encode($credentials['clientId'] . ':' . $credentials['clientSecret'])
     ];
-    $body = http_build_query($postData);
+    $body = http_build_query(data: $postData, encoding_type: PHP_QUERY_RFC3986);
     $ch = curl_init($grantUrl);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
