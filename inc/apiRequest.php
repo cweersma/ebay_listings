@@ -6,7 +6,7 @@
  * @param string $method The HTTP method to be used for the request (GET, POST, PUT, DELETE, etc.)
  * @param string $tokenType The type of access token required by the endpoint (either "user" or "application")
  * @param array|null $payload The payload, if any, to be sent to the endpoint (as a nested associative array to be encoded as JSON)
- * @param array $headers An array of HTTP headers to be sent (excluding Accept, Accept-Charset, Accept-Language, Authorization, Content-Type, and Content-Language)
+ * @param array|null $headers An array of HTTP headers to be sent (excluding Accept, Accept-Charset, Accept-Language, Authorization, Content-Type, and Content-Language)
  *
  * @throws Exception if no session is active, or if any of the parameters are incorrect
  *
