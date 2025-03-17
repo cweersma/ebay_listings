@@ -65,5 +65,16 @@ async function apiRequest(endpoint, method = "GET", tokenType = "user", payload 
         body: new URLSearchParams(requestObj)
     })
         .then(response => { return response.text(); })
-        .then(text => { return JSON.parse(text); });
+        .then(text => {
+            let responseJSON = JSON.parse(text);
+            if (responseJSON.errors){
+                if (responseJSON.errors[0].errorId === 1100){
+                    window.location = "/authorize.php";
+                }
+                else {
+                    alert("eBay API error: "+responseJSON.errors[0].longMessage);
+                }
+            }
+            return responseJSON;
+        });
 }
