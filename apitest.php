@@ -74,6 +74,7 @@ require_once("inc/checkAuth.php");
             <label for="payload">Payload:</label><textarea id="payload" disabled></textarea><br/>
             <button id="submitRequest">Submit</button><button id="clearBtn">Clear</button>
         </div>
+        <hr />
         <div id="output">
             <h2>Output</h2>
             Raw response:
