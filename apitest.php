@@ -42,6 +42,9 @@ require_once("inc/checkAuth.php");
                     $("headers").value = "";
                     $("payload").value = "";
                 });
+                $("method").addEventListener("change",(e) => {
+                    $("payload").disabled = (e.currentTarget.value === "GET" || e.currentTarget.value === "DELETE");
+                });
             }
         </script>
         <style>
@@ -68,7 +71,7 @@ require_once("inc/checkAuth.php");
                 <label for="tokenApp">Application</label><input type="radio" id="tokenApp" name="token" value="app" />
             </fieldset>
             <label for="headers">Headers (Authorization included by default):</label><textarea id="headers" title="Each header should go on its own line."></textarea><br/>
-            <label for="payload">Payload:</label><textarea id="payload"></textarea><br/>
+            <label for="payload">Payload:</label><textarea id="payload" disabled></textarea><br/>
             <button id="submitRequest">Submit</button><button id="clearBtn">Clear</button>
         </div>
         <div id="output">
