@@ -35,7 +35,7 @@ require_once("inc/checkAuth.php");
                     let payloadObj = $("payload").value ? JSON.parse($("payload").value) : null;
 
                     apiRequest($("path").value,$("method").value,tokenType,payloadObj,headersObj)
-                        .then(resultObj => { $("response").innerHTML = JSON.stringify(resultObj)});
+                        .then(resultObj => { $("response").innerHTML = JSON.stringify(resultObj,2)});
                 });
                 $("clearBtn").addEventListener("click",() => {
                     $("path").value = "";
@@ -74,7 +74,7 @@ require_once("inc/checkAuth.php");
         <div id="output">
             <h2>Output</h2>
             Raw response:
-            <div id="response"></div>
+            <pre id="response"></pre>
         </div>
     </body>
 </html>
