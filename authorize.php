@@ -9,7 +9,12 @@ $clientId = $credentials['clientId'];
 $redirectUri = $credentials['ruName'];
 
 $baseUrl = "https://auth.".($env == "sandbox" ? "sandbox.": "")."ebay.com/oauth2/authorize";
-$url = $baseUrl."?client_id=".$clientId."&redirect_uri=".$redirectUri."&response_type=code&state=".$env;
+$url = $baseUrl."?".
+    "client_id=".$clientId."&".
+    "redirect_uri=".$redirectUri."&".
+    "response_type=code&".
+    "state=".$env."&".
+    "scope=".rawurlencode(implode(" ",$apiauth['user_scopes']));
 ?>
 <!DOCTYPE html>
 <html lang="en">
