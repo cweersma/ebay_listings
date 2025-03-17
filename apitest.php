@@ -34,9 +34,8 @@ require_once("inc/checkAuth.php");
                     }
                     let payloadObj = $("payload").value ? JSON.parse($("payload").value) : null;
 
-
                     apiRequest($("path").value,$("method").value,tokenType,payloadObj,headersObj)
-                        .then(resultObj => { return JSON.parse(resultObj)});
+                        .then(resultObj => { $("response").innerHTML = JSON.stringify(resultObj)});
                 });
                 $("clearBtn").addEventListener("click",() => {
                     $("path").value = "";
