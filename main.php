@@ -2,6 +2,9 @@
 //Include this with every page
 session_start();
 require_once("inc/checkAuth.php");
+//Set a baseURL cookie to be
+global $baseURL;
+setcookie("baseURL",$baseURL, time() + (86400 * 30), "/");
 ?>
 <!DOCTYPE html>
 <html lang="en">
