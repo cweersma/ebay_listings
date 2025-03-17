@@ -5,5 +5,5 @@ td, th {
     border: 1px solid black;
 }
 :disabled {
-    background-color: #ccc;
+    display: none;
 }
