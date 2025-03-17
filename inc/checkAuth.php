@@ -26,7 +26,8 @@ if (!isset($_SESSION['ebay_user_access_token_'.$_SESSION['env']]) || $_SESSION['
 
     $userAccess = oauthRequest([
         "grant_type" => "refresh_token",
-        "refresh_token" => $refresh_token
+        "refresh_token" => $refresh_token,
+        "scope" => implode(" ",$apiauth['user_scopes'])
     ],$_SESSION['env']);
 
     $_SESSION['ebay_user_access_token_'.$_SESSION['env']] = $userAccess['access_token'];

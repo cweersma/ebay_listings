@@ -69,5 +69,16 @@ $apiauth = [
     ],
     "app_scopes"=> [
         "https://api.ebay.com/oauth/api_scope"
+    ],
+    "user_scopes"=> [
+        "https://api.ebay.com/oauth/api_scope",
+        "https://api.ebay.com/oauth/api_scope/sell.inventory",
+        "https://api.ebay.com/oauth/api_scope/sell.inventory.readonly",
+        "https://api.ebay.com/oauth/api_scope/sell.account",
+        "https://api.ebay.com/oauth/api_scope/sell.account.readonly",
+        "https://api.ebay.com/oauth/api_scope/sell.fulfillment",
+        "https://api.ebay.com/oauth/api_scope/sell.item.draft",
+        "https://api.ebay.com/oauth/api_scope/sell.stores",
+        "https://api.ebay.com/oauth/api_scope/sell.stores.readonly"
     ]
 ];
