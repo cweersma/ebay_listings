@@ -13,7 +13,7 @@ $userAccess = oauthRequest([
     "grant_type" => "authorization_code",
     "code" => $code,
     "redirect_uri" => $apiauth[$env]['ruName'],
-    "scope" => implode(" ",$apiauth['app_scopes'])
+    "scope" => implode(" ",$apiauth['user_scopes'])
 ],$env);
 
 $applicationAccess = oauthRequest([
