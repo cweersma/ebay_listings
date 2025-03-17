@@ -53,5 +53,11 @@ function apiRequest(string $endpoint, string $method = 'GET', string $tokenType 
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
     curl_setopt($ch, CURLOPT_ENCODING,'gzip');
     if ($payload) curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload, JSON_UNESCAPED_SLASHES));
-    return json_decode(curl_exec($ch),true);
+    $response = json_decode(curl_exec($ch),true);
+    if (isset($response['errors'])){
+        $response['session_vars'] = $_SESSION;
+        $response['headers'] = $headerArray;
+        $response['body'] = $payload;
+    }
+    return $response;
 }
