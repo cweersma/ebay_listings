@@ -9,6 +9,12 @@ require_once("inc/checkAuth.php");
         <title>eBay API test (<?php echo $_SESSION['env']; ?>)</title>
         <link rel="stylesheet" href="style/main.css" type="text/css" />
         <link rel="stylesheet" href="style/<?php echo $_SESSION['env']; ?>.css" type="text/css" />
+        <style>
+            fieldset {
+                width: 25ch;
+                display: inline-block;
+            }
+        </style>
         <script type="text/javascript" src="script/request.js"></script>
         <script>
             function $(id){
@@ -70,6 +76,7 @@ require_once("inc/checkAuth.php");
                 <label for="tokenUser">User</label><input type="radio" id="tokenUser" name="token" value="user" checked />
                 <label for="tokenApp">Application</label><input type="radio" id="tokenApp" name="token" value="app" />
             </fieldset>
+            <br />
             <label for="headers">Headers (Authorization included by default):</label><textarea id="headers" title="Each header should go on its own line."></textarea><br/>
             <label for="payload">Payload:</label><textarea id="payload" disabled></textarea><br/>
             <button id="submitRequest">Submit</button><button id="clearBtn">Clear</button>
