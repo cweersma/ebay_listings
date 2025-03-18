@@ -44,9 +44,7 @@ async function apiRequest(endpoint, method = "GET", tokenType = "user", payload 
     if (method === "GET" && payload != null){
         console.log("Payload sent with a GET call; this will be ignored");
     }
-    else if (method !== "GET" && payload == null){
-        return Promise.reject(new Error("Payload is required for a "+method+" call"));
-    }
+
     let headersString = JSON.stringify(headers);
     let payloadString = JSON.stringify(payload);
     let requestObj = {
