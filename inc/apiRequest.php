@@ -28,9 +28,6 @@ function apiRequest(string $endpoint, string $method = 'GET', string $tokenType 
     if ($method == 'GET' && !empty($payload)) {
         $payload = null;    //Payloads don't apply to GET requests, so we're just going to throw those away
     }
-    elseif ($method != 'GET' && empty($payload)) {
-        throw new Exception("Missing payload for $method request");
-    }
 
     $url = "https://api.".($_SESSION['env'] == "sandbox" ? "sandbox." : "")."ebay.com/".$endpoint;
     $commonHeaders = [
