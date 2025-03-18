@@ -54,7 +54,7 @@ require_once("inc/checkAuth.php");
                     let payloadObj = $("payload").value ? JSON.parse($("payload").value) : null;
 
                     apiRequest($("path").value,$("method").value,tokenType,payloadObj,headersObj)
-                        .then(resultObj => { $("response").innerHTML = safe_tags_replace(JSON.stringify(resultObj,null,2)}));
+                        .then(resultObj => { $("response").innerHTML = safe_tags_replace(JSON.stringify(resultObj,null,2))});
                 });
                 $("clearBtn").addEventListener("click",() => {
                     $("path").value = "";
