@@ -59,5 +59,5 @@ function apiRequest(string $endpoint, string $method = 'GET', string $tokenType 
         $response['headers'] = $headerArray;
         $response['body'] = $payload;
     }
-    return $response;
+    return $response ?? ["status" => "Request completed without response"];
 }
