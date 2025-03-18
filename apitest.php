@@ -17,6 +17,19 @@ require_once("inc/checkAuth.php");
         </style>
         <script type="text/javascript" src="script/request.js"></script>
         <script>
+            var tagsToReplace = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;'
+            };
+
+            function replaceTag(tag) {
+                return tagsToReplace[tag] || tag;
+            }
+
+            function safe_tags_replace(str) {
+                return str.replace(/[&<>]/g, replaceTag);
+            }
             function $(id){
                 return document.getElementById(id);
             }
@@ -41,7 +54,7 @@ require_once("inc/checkAuth.php");
                     let payloadObj = $("payload").value ? JSON.parse($("payload").value) : null;
 
                     apiRequest($("path").value,$("method").value,tokenType,payloadObj,headersObj)
-                        .then(resultObj => { $("response").innerHTML = JSON.stringify(resultObj,null,2)});
+                        .then(resultObj => { $("response").innerHTML = safe_tags_replace(JSON.stringify(resultObj,null,2)}));
                 });
                 $("clearBtn").addEventListener("click",() => {
                     $("path").value = "";
