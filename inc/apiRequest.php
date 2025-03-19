@@ -43,18 +43,31 @@ function apiRequest(string $endpoint, string $method = 'GET', string $tokenType 
     array_walk($headerArray, 'assembleHeaders');
     $headerArray = array_values($headerArray);
 
+    $responseHeaders = [];
+
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headerArray);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
     curl_setopt($ch, CURLOPT_ENCODING,'gzip');
+    curl_setopt($ch, CURLOPT_HEADERFUNCTION, function ($curl, $header) use (&$responseHeaders) {
+        $len = strlen($header);
+        $header = explode(':', $header, 2);
+        if (count($header) < 2) {
+            return $len;
+        }
+        $responseHeaders[strtolower(trim($header[0]))] = trim($header[1]);
+        return $len;
+    });
+
     if ($payload) curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload, JSON_UNESCAPED_SLASHES));
     $response = json_decode(curl_exec($ch),true);
     if (isset($response['errors'])){
         $response['session_vars'] = $_SESSION;
         $response['headers'] = $headerArray;
         $response['body'] = $payload;
+        $response['response_headers'] = json_encode($responseHeaders, JSON_UNESCAPED_SLASHES);
     }
     return $response ?? ["status" => "Request completed without response"];
 }
