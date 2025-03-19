@@ -51,10 +51,17 @@ require_once("inc/checkAuth.php");
                             headersObj[headerComponents[0]] = headerComponents[1];
                         }
                     }
-                    let payloadObj = $("payload").value ? JSON.parse($("payload").value) : null;
-
+                    let payloadObj = $("payload").value ? JSON.parse($("payload").value) : null
+                    $("response").innerHTML = "";
+                    $("submitRequest").innerHTML = "Sending request...";
+                    $("submitRequest").disabled = true;
                     apiRequest($("path").value,$("method").value,tokenType,payloadObj,headersObj)
-                        .then(resultObj => { $("response").innerHTML = safe_tags_replace(JSON.stringify(resultObj,null,2))});
+                        .then(resultObj => {
+                            window.lastResponse = JSON.stringify(resultObj,null,2);
+                            $("response").innerHTML = safe_tags_replace(window.lastResponse);
+                            $("submitRequest").innerHTML = "Submit";
+                            $("submitRequest").disabled = false;
+                        });
                 });
                 $("clearBtn").addEventListener("click",() => {
                     $("path").value = "";
@@ -64,6 +71,11 @@ require_once("inc/checkAuth.php");
                 $("method").addEventListener("change",(e) => {
                     $("payload").disabled = (e.currentTarget.value === "GET" || e.currentTarget.value === "DELETE");
                 });
+                $("copy").addEventListener("click", () => {
+                    if (window.lastResponse){
+                        navigator.clipboard.writeText(window.lastResponse);
+                    }
+                })
             }
         </script>
         <style>
@@ -96,8 +108,8 @@ require_once("inc/checkAuth.php");
         </div>
         <hr />
         <div id="output">
-            <h2>Output</h2>
-            Raw response:
+            <h2>Response</h2>
+            <button id="copy">Copy to clipboard</button>
             <pre id="response"></pre>
         </div>
     </body>
