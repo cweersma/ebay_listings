@@ -14,6 +14,9 @@ require_once("inc/checkAuth.php");
                 width: 25ch;
                 display: inline-block;
             }
+            #payload:disabled, :has(+ #payload:disabled) {
+                display: none;
+            }
         </style>
         <script type="text/javascript" src="script/request.js"></script>
         <script>
