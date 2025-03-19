@@ -67,7 +67,7 @@ function apiRequest(string $endpoint, string $method = 'GET', string $tokenType 
         $response['session_vars'] = $_SESSION;
         $response['headers'] = $headerArray;
         $response['body'] = $payload;
-        $response['response_headers'] = json_encode($responseHeaders, JSON_UNESCAPED_SLASHES);
+        $response['response_headers'] = $responseHeaders;
     }
     return $response ?? ["status" => "Request completed without response"];
 }
