@@ -57,6 +57,7 @@ require_once("inc/checkAuth.php");
                     let payloadObj = $("payload").value ? JSON.parse($("payload").value) : null
                     $("response").innerHTML = "";
                     $("submitRequest").innerHTML = "Sending request...";
+                    $("copiedStatus").innerHTML = "";
                     $("submitRequest").disabled = true;
                     apiRequest($("path").value,$("method").value,tokenType,payloadObj,headersObj)
                         .then(resultObj => {
@@ -76,7 +77,7 @@ require_once("inc/checkAuth.php");
                 });
                 $("copy").addEventListener("click", () => {
                     if (window.lastResponse){
-                        navigator.clipboard.writeText(window.lastResponse);
+                        navigator.clipboard.writeText(window.lastResponse).then(() => { $("copiedStatus").innerHTML = "Response copied."; });
                     }
                 })
             }
@@ -112,7 +113,7 @@ require_once("inc/checkAuth.php");
         <hr />
         <div id="output">
             <h2>Response</h2>
-            <button id="copy">Copy to clipboard</button>
+            <button id="copy">Copy to clipboard</button><span id="copiedStatus"></span>
             <pre id="response"></pre>
         </div>
     </body>
