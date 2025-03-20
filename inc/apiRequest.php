@@ -79,6 +79,8 @@ function apiRequest(string $endpoint, string $method = 'GET', string $tokenType 
  * * This will send headers if headers haven't already been sent. This may result in errors if the calling script attempts to send headers later.
  * * This function will detect errors returned from the API and output an appropriate event, but it does not treat these as exceptions. If specific error handling
  * is needed (for logging, etc.) the returned array should be checked for the existence of an "errors" key.
+ * * If the contents of the returned array need to be sent to the browser in some form or another during the execution of the calling script,
+ *   they must be sent in the form of an SSE, or stored in such a way that a different script can retrieve them.
  *
  * @param string $endpoint              {@see apiRequest}
  * @param array $statusMessages         An associative array of status messages to be sent at the appropriate times, containing
