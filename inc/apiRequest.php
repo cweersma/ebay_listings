@@ -118,6 +118,11 @@ function apiRequestSSE(string $endpoint, array $statusMessages, string $method =
     }
     elseif (isset($statusMessages['success'])){
         echo "event: success\n";
-        echo "data: ".$statusMessages['success']."\n";
+        echo "data: ".$statusMessages['success']."\n\n";
     }
+    if (isset($statusMessages['completion'])){
+        echo "event: completion\n";
+        echo "data: ".$statusMessages['completion']."\n\n";
+    }
+    return $response;
 }
